@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programas - The Systems House</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const buscador = document.getElementById("buscador");
+        const resultados = document.getElementById("resultados-busqueda");
+        const productos = document.querySelectorAll(".producto");
+
+        function filtrarProductos(texto) {
+            let resultadosHTML = "";
+            const textoMin = texto.toLowerCase();
+
+            productos.forEach(prod => {
+                const nombre = prod.querySelector("h3").innerText.toLowerCase();
+                if (nombre.includes(textoMin) && texto.trim() !== "") {
+                    resultadosHTML += `<li data-nombre="${nombre}">${prod.querySelector("h3").innerText}</li>`;
+                }
+            });
+
+            resultados.innerHTML = resultadosHTML;
+            resultados.style.display = resultadosHTML ? "block" : "none";
+        }
+
+        buscador.addEventListener("input", function () {
+            filtrarProductos(this.value);
+        });
+
+        resultados.addEventListener("click", function (e) {
+            if (e.target.tagName === "LI") {
+                const nombre = e.target.getAttribute("data-nombre");
+                const productoEncontrado = Array.from(productos).find(p =>
+                    p.querySelector("h3").innerText.toLowerCase() === nombre
+                );
+                if (productoEncontrado) {
+                    productoEncontrado.scrollIntoView({ behavior: "smooth", block: "center" });
+                    productoEncontrado.style.border = "2px solid #00aaff";
+                    setTimeout(() => {
+                        productoEncontrado.style.border = "";
+                    }, 2000);
+                }
+                resultados.style.display = "none";
+            }
+        });
+
+        document.addEventListener("click", function (e) {
+            if (!resultados.contains(e.target) && e.target !== buscador) {
+                resultados.style.display = "none";
+            }
+        });
+    });
+</script>
+
+<body>
+    <header>
+        <div class="logo">The Systems House</div>
+
+        <nav>
+            <ul class="menu" id="menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="sobre_nosotros.html">Sobre nosotros</a></li>
+                <li><a href="programas.html">Programas</a></li>
+                <li><a href="como_comprar.html">¿COMO COMPRAR?</a></li>
+                <li class="dropdown">
+                    <a href="#">PRODUCTOS ▾</a>
+                    <ul class="submenu">
+                        <li><a href="#">LAPTOPS</a></li>
+                        <li><a href="Componentes.html">COMPONENTES Y ACCESORIOS DE LAPTOPS</a></li>
+                        <li><a href="#">COMPUTADORAS</a></li>
+                        <li><a href="componentes_pc.html">COMPONENTES Y ACCESORIOS PARA PC</a></li>
+                        <li><a href="#">IMPRESORAS</a></li>
+                        <li><a href="#">TABLET</a></li>
+                        <li><a href="#">IPHONE</a></li>
+                        <li><a href="#">PROYECTORES</a></li>
+                        <li><a href="#">PERIFERICOS</a></li>
+                        <li><a href="#">ALMACENAMIENTO</a></li>
+
+                    </ul>
+                </li>
+
+            </ul>
+        </nav>
+
+        <!-- Botón menú hamburguesa a la derecha -->
+        <div class="menu-toggle" id="menu-toggle">
+            ☰
+        </div>
+    </header>
+
+    <!-- Barra de búsqueda -->
+    <!-- Barra de búsqueda -->
+    <div class="busqueda-container">
+        <input type="text" id="buscador" placeholder="Buscar producto...">
+        <button id="btn-buscar">
+            🔍
+        </button>
+        <ul id="resultados-busqueda">
+            <!-- Aquí JS insertará las sugerencias -->
+        </ul>
+    </div>
+
+
+
+
+
+
+    <main>
+        <section class="productos">
+            <!-- Producto 1 -->
+            <div class="producto">
+                <img src="img/ANTIVIRUS-ESET-NOD32-X-5PC-2021.png" alt="Producto 1">
+                <h3>ANTIVIRUS ESET NOD32</h3>
+                <div class="precios">
+                    <div class="fila-precio">
+                        <span class="tipo">C.A.</span>
+                        <span class="precio-antiguo">S/75.00</span>
+                        <span class="precio-nuevo">S/60.00</span>
+                    </div>
+                </div>
+                <div class="botones-compra">
+                    <button>comprar por un año (C.A)</button>
+                    
+                </div>
+            </div>
+
+            <!-- Producto 2 -->
+            <div class="producto">
+                <img src="img/Licencia Antivirus Kaspersky Plus 1PC Blister.jpg" alt="Producto 2">
+                <h3>Licencia Antivirus Kaspersky Plus 1PC </h3>
+                <div class="precios">
+                    <div class="fila-precio">
+                        <span class="tipo">C.A.</span>
+                        <span class="precio-antiguo">S/50.00</span>
+                        <span class="precio-nuevo">S/38.00</span>
+                    </div>
+                    
+                </div>
+                <div class="botones-compra">
+                    <button>comprar por un año (C.A)</button>
+                </div>
+            </div>
+
+            <!-- Producto 3 -->
+            <div class="producto">
+                <img src="img/OFFICE XD.png" alt="Producto 3">
+                <h3>Office 2016</h3>
+                <div class="precios">
+                    <div class="fila-precio">
+                        <span class="tipo">C.A.</span>
+                        <span class="precio-antiguo">20.00</span>
+                        <span class="precio-nuevo">S/5.00</span>
+                    </div>
+                    <div class="fila-precio">
+                        <span class="tipo">C.P.</span>
+                        <span class="precio-antiguo">S/25.00</span>
+                        <span class="precio-nuevo">S/10.00</span>
+                    </div>
+                </div>
+                <div class="botones-compra">
+                    <button>Comprar por un año (P.A)</button>
+                    <button>Comprar permanente (C.P)</button>
+                </div>
+            </div>
+
+            <!-- Producto 4 -->
+            <div class="producto">
+                <img src="img/OFFICE XD.png" alt="Producto 4">
+                <h3>Office 2019</h3>
+                <div class="precios">
+                    <div class="fila-precio">
+                        <span class="tipo">C.A</span>
+                        <span class="precio-antiguo">S/25.00</span>
+                        <span class="precio-nuevo">S/10.00</span>
+                    </div>
+                    <div class="fila-precio">
+                        <span class="tipo">C.P</span>
+                        <span class="precio-antiguo">S/30.00</span>
+                        <span class="precio-nuevo">S/15.00</span>
+                    </div>
+                </div>
+                <div class="botones-compra">
+                    <button>Comprar por un año (C.A)</button>
+                    <button>Comprar permanente (C.P)</button>
+                </div>
+            </div>
+
+            <!-- Producto 5 -->
+            <div class="producto">
+                <img src="img/OFFICE XD.png" alt="Producto 5">
+                <h3>Office 2021</h3>
+                <div class="precios">
+                    <div class="fila-precio">
+                        <span class="tipo">C.A</span>
+                        <span class="precio-antiguo">S/30.00</span>
+                        <span class="precio-nuevo">S/15.00</span>
+                    </div>
+                    <div class="fila-precio">
+                        <span class="tipo">C.P</span>
+                        <span class="precio-antiguo">S/35.00</span>
+                        <span class="precio-nuevo">S/20.00</span>
+                    </div>
+                </div>
+                <div class="botones-compra">
+                    <button>Comprar por un año (C.A)</button>
+                    <button>Comprar permanente (C.P)</button>
+                </div>
+            </div>
+
+            <!-- Producto 6 -->
+            <div class="producto">
+                <img src="img/OFFICE XD.png" alt="Producto 6">
+                <h3>Office 2024</h3>
+                <div class="precios">
+                    <div class="fila-precio">
+                        <span class="tipo">C.A</span>
+                        <span class="precio-antiguo">S/35.00</span>
+                        <span class="precio-nuevo">S/20.00</span>
+                    </div>
+                    <div class="fila-precio">
+                        <span class="tipo">C.P</span>
+                        <span class="precio-antiguo">S/40.00</span>
+                        <span class="precio-nuevo">S/25.00</span>
+                    </div>
+                </div>
+                <div class="botones-compra">
+                    <button>Comprar por un año (C.A)</button>
+                    <button>Comprar permanente (C.P)</button>
+                </div>
+            </div>
+
+            <!-- Producto 7 -->
+            <div class="producto">
+                <img src="img/adobe acrobat pro.png" alt="Producto 7">
+                <h3>Adobe Acrobat pro</h3>
+                <div class="precios">
+                    <div class="fila-precio">
+                        <span class="tipo">P.A</span>
+                        <span class="precio-antiguo">S/10.00</span>
+                        <span class="precio-nuevo">S/15.00</span>
+                    </div>
+                    <div class="fila-precio">
+                        <span class="tipo">P.P</span>
+                        <span class="precio-antiguo">S/25.00</span>
+                        <span class="precio-nuevo">S/18.00</span>
+                    </div>
+                </div>
+                <div class="botones-compra">
+                    <button>Comprar (P.A)</button>
+                    <button>Comprar (P.P)</button>
+                </div>
+            </div>
+
+            <!-- Producto 8 -->
+            <div class="producto">
+                <img src="img/Adobe_reader.png" alt="Producto 8">
+                <h3>Adobe Reader</h3>
+                <div class="precios">
+                    <div class="fila-precio">
+                        <span class="tipo">P.A</span>
+                        <span class="precio-antiguo">S/20.00</span>
+                        <span class="precio-nuevo">S/15.00</span>
+                    </div>
+                    <div class="fila-precio">
+                        <span class="tipo">P.P</span>
+                        <span class="precio-antiguo">S/30.00</span>
+                        <span class="precio-nuevo">S/18.00</span>
+                    </div>
+                </div>
+                <div class="botones-compra">
+                    <button>Comprar (P.A)</button>
+                    <button>Comprar (P.P)</button>
+                </div>
+            </div>
+
+            <!-- Producto 9 -->
+            <div class="producto">
+                <img src="img/argis.png" alt="Producto 9">
+                <h3>ArcGIS 10.8 10.5</h3>
+                <div class="precios">
+                    <div class="fila-precio">
+                        <span class="tipo">P.A</span>
+                        <span class="precio-antiguo">S/25.00</span>
+                        <span class="precio-nuevo">S/15.00</span>
+                    </div>
+                    <div class="fila-precio">
+                        <span class="tipo">P.P</span>
+                        <span class="precio-antiguo">S/30.00</span>
+                        <span class="precio-nuevo">S/20.00</span>
+                    </div>
+                </div>
+                <div class="botones-compra">
+                    <button>Comprar (P.A)</button>
+                    <button>Comprar (P.P)</button>
+                </div>
+            </div>
+
+            <!-- Producto 10 -->
+            <div class="producto">
+                <img src="img/chema.png" alt="Producto 10">
+                <h3>ChemDraw</h3>
+                <div class="precios">
+                    <div class="fila-precio">
+                        <span class="tipo">P.A</span>
+                        <span class="precio-antiguo">S/25.00</span>
+                        <span class="precio-nuevo">S/18.00</span>
+                    </div>
+                    <div class="fila-precio">
+                        <span class="tipo">P.P</span>
+                        <span class="precio-antiguo">S/35.00</span>
+                        <span class="precio-nuevo">S/20.00</span>
+                    </div>
+                </div>
+                <div class="botones-compra">
+                    <button>Comprar (P.A)</button>
+                    <button>Comprar (P.P)</button>
+                </div>
+            </div>
+
+            <div class="producto">
+                <img src="img/coreldraw-graphics-suite-2023.webp" alt="Producto 10">
+                <h3>CorelDraw</h3>
+                <div class="precios">
+                    <div class="fila-precio">
+                        <span class="tipo">P.A</span>
+                        <span class="precio-antiguo">S/40.00</span>
+                        <span class="precio-nuevo">S/25.00</span>
+                    </div>
+                    <div class="fila-precio">
+                        <span class="tipo">P.P</span>
+                        <span class="precio-antiguo">S/35.00</span>
+                        <span class="precio-nuevo">S/30.00</span>
+                    </div>
+                </div>
+                <div class="botones-compra">
+                    <button>Comprar (P.A)</button>
+                    <button>Comprar (P.P)</button>
+                </div>
+            </div>
+
+            <div class="producto">
+                <img src="img/SketchUp-logo.png" alt="Producto 10">
+                <h3>SketchUp</h3>
+                <div class="precios">
+                    <div class="fila-precio">
+                        <span class="tipo">P.A</span>
+                        <span class="precio-antiguo">S/35.00</span>
+                        <span class="precio-nuevo">S/25.00</span>
+                    </div>
+                    <div class="fila-precio">
+                        <span class="tipo">P.P</span>
+                        <span class="precio-antiguo">S/35.00</span>
+                        <span class="precio-nuevo">S/30.00</span>
+                    </div>
+                </div>
+                <div class="botones-compra">
+                    <button>Comprar (P.A)</button>
+                    <button>Comprar (P.P)</button>
+                </div>
+            </div>
+
+            <div class="producto">
+                <img src="img/ibm.png" alt="Producto 10">
+                <h3>Spss Statistics</h3>
+                <div class="precios">
+                    <div class="fila-precio">
+                        <span class="tipo">P.A</span>
+                        <span class="precio-antiguo">S/35.00</span>
+                        <span class="precio-nuevo">S/18.00</span>
+                    </div>
+                    <div class="fila-precio">
+                        <span class="tipo">P.P</span>
+                        <span class="precio-antiguo">S/35.00</span>
+                        <span class="precio-nuevo">S/22.00</span>
+                    </div>
+                </div>
+                <div class="botones-compra">
+                    <button>Comprar (P.A)</button>
+                    <button>Comprar (P.P)</button>
+                </div>
+            </div>
+
+            <div class="producto">
+                <img src="img/Stella_Figura00.JPG" alt="Producto 10">
+                <h3>Stellla</h3>
+                <div class="precios">
+                    <div class="fila-precio">
+                        <span class="tipo">P.A</span>
+                        <span class="precio-antiguo">S/25.00</span>
+                        <span class="precio-nuevo">S/10.00</span>
+                    </div>
+                    <div class="fila-precio">
+                        <span class="tipo">P.P</span>
+                        <span class="precio-antiguo">S/30.00</span>
+                        <span class="precio-nuevo">S/15.00</span>
+                    </div>
+                </div>
+                <div class="botones-compra">
+                    <button>Comprar (P.A)</button>
+                    <button>Comprar (P.P)</button>
+                </div>
+            </div>
+
+            <div class="producto">
+                <img src="img/777777777777777.png" alt="Producto 10">
+                <h3>WINDOWS 7</h3>
+                <div class="precios">
+                    <div class="fila-precio">
+                        <span class="tipo"></span>
+                        <span class="precio-antiguo">S/25.00</span>
+                        <span class="precio-nuevo">S/20.00</span>
+                    </div>
+                    
+                </div>
+                <div class="botones-compra">
+                    <button>Comprar instalacion</button>
+                </div>
+            </div>
+
+            <div class="producto">
+                <img src="img/10.png" alt="Producto 10">
+                <h3>WINDOWS 10</h3>
+                <div class="precios">
+                    <div class="fila-precio">
+                        <span class="tipo"></span>
+                        <span class="precio-antiguo">S/40.00</span>
+                        <span class="precio-nuevo">S/30.00</span>
+                    </div>
+                    
+                </div>
+                <div class="botones-compra">
+                    <button>Comprar instalacion</button>
+                </div>
+            </div>
+
+            <div class="producto">
+                <img src="img/10000000.png" alt="Producto 10">
+                <h3>WINDOWS 11</h3>
+                <div class="precios">
+                    <div class="fila-precio">
+                        <span class="tipo"></span>
+                        <span class="precio-antiguo">S/70.00</span>
+                        <span class="precio-nuevo">S/35.00</span>
+                    </div>
+                    
+                </div>
+                <div class="botones-compra">
+                    <button>Comprar instalacion</button>
+                </div>
+            </div>
+
+            <div class="producto">
+                <img src="img/photo.png" alt="Producto 10">
+                <h3>Adobe Photoshop 2023</h3>
+                <div class="precios">
+                    <div class="fila-precio">
+                        <span class="tipo">P.A</span>
+                        <span class="precio-antiguo">S/25.00</span>
+                        <span class="precio-nuevo">S/22.00</span>
+                    </div>
+                    <div class="fila-precio">
+                        <span class="tipo">P.P</span>
+                        <span class="precio-antiguo">S/35.00</span>
+                        <span class="precio-nuevo">S/25.00</span>
+                    </div>
+                </div>
+                <div class="botones-compra">
+                    <button>Comprar (P.A)</button>
+                    <button>Comprar (P.P)</button>
+                </div>
+            </div>
+
+            <div class="producto">
+                <img src="img/PREMIER.png" alt="Producto 10">
+                <h3>Adobe Premiere Pro 2023</h3>
+                <div class="precios">
+                    <div class="fila-precio">
+                        <span class="tipo">P.A</span>
+                        <span class="precio-antiguo">S/40.00</span>
+                        <span class="precio-nuevo">S/22.00</span>
+                    </div>
+                    <div class="fila-precio">
+                        <span class="tipo">P.P</span>
+                        <span class="precio-antiguo">S/50.00</span>
+                        <span class="precio-nuevo">S/25.00</span>
+                    </div>
+                </div>
+                <div class="botones-compra">
+                    <button>Comprar (P.A)</button>
+                    <button>Comprar (P.P)</button>
+                </div>
+            </div>
+
+            <div class="producto">
+                <img src="img/ilus.png" alt="Producto 10">
+                <h3>Adobe Illustrator 2023</h3>
+                <div class="precios">
+                    <div class="fila-precio">
+                        <span class="tipo">P.A</span>
+                        <span class="precio-antiguo">S/25.00</span>
+                        <span class="precio-nuevo">S/22.00</span>
+                    </div>
+                    <div class="fila-precio">
+                        <span class="tipo">P.P</span>
+                        <span class="precio-antiguo">S/35.00</span>
+                        <span class="precio-nuevo">S/25.00</span>
+                    </div>
+                </div>
+                <div class="botones-compra">
+                    <button>Comprar (P.A)</button>
+                    <button>Comprar (P.P)</button>
+                </div>
+            </div>
+
+            <div class="producto">
+                <img src="img/LIT.png" alt="Producto 10">
+                <h3>Adobe Lightroom 2023</h3>
+                <div class="precios">
+                    <div class="fila-precio">
+                        <span class="tipo">P.A</span>
+                        <span class="precio-antiguo">S/50.00</span>
+                        <span class="precio-nuevo">S/22.00</span>
+                    </div>
+                    <div class="fila-precio">
+                        <span class="tipo">P.P</span>
+                        <span class="precio-antiguo">S/70.00</span>
+                        <span class="precio-nuevo">S/25.00</span>
+                    </div>
+                </div>
+                <div class="botones-compra">
+                    <button>Comprar (P.A)</button>
+                    <button>Comprar (P.P)</button>
+                </div>
+            </div>
+
+            <div class="producto">
+                <img src="img/EFE.png" alt="Producto 10">
+                <h3>Adobe After Effects 2023</h3>
+                <div class="precios">
+                    <div class="fila-precio">
+                        <span class="tipo">P.A</span>
+                        <span class="precio-antiguo">S/35.00</span>
+                        <span class="precio-nuevo">S/25.00</span>
+                    </div>
+                    <div class="fila-precio">
+                        <span class="tipo">P.P</span>
+                        <span class="precio-antiguo">S/35.00</span>
+                        <span class="precio-nuevo">S/30.00</span>
+                    </div>
+                </div>
+                <div class="botones-compra">
+                    <button>Comprar (P.A)</button>
+                    <button>Comprar (P.P)</button>
+                </div>
+            </div> 
+            
+            <div class="producto">
+                <img src="img/AAU.png" alt="Producto 10">
+                <h3>AUTOCAD</h3>
+                <div class="precios">
+                    <div class="fila-precio">
+                        <span class="tipo">P.A</span>
+                        <span class="precio-antiguo">S/35.00</span>
+                        <span class="precio-nuevo">S/25.00</span>
+                    </div>
+                    <div class="fila-precio">
+                        <span class="tipo">P.P</span>
+                        <span class="precio-antiguo">S/35.00</span>
+                        <span class="precio-nuevo">S/30.00</span>
+                    </div>
+                </div>
+                <div class="botones-compra">
+                    <button>Comprar (P.A)</button>
+                    <button>Comprar (P.P)</button>
+                </div>
+            </div> 
+            <!-- Aquí seguiría del producto 11 al producto 20 con el mismo formato -->
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 - The Systems House</p>
+    </footer>
+
+    <script>
+(function () {
+  const PHONE = "51912886670"; // +51 (Perú) + número 912886670
+
+  // Normaliza "C.A", "c.a", "CA" -> "CA", "P.P" -> "PP", etc.
+  const norm = (t) => (t || "")
+    .toUpperCase()
+    .replace(/[^A-Z0-9]/g, ""); // quita puntos y espacios
+
+  // Arma y abre el enlace de WhatsApp
+  function enviarWhatsApp({ producto, opcion, precio }) {
+    const msg = [
+      "Hola, quiero comprar:",
+      `• Producto: ${producto}`,
+      `• Opción: ${opcion || "N/A"}`,
+      `• Precio: ${precio || "S/ -"}`,
+      "• Cantidad: 1",
+      "",
+      "¿Me confirmas stock y el siguiente paso?"
+    ].join("\n");
+
+    const url = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(msg);
+    window.open(url, "_blank");
+  }
+
+  document.querySelectorAll(".producto").forEach((card) => {
+    const nombre = (card.querySelector("h3")?.textContent || "").trim();
+
+    card.querySelectorAll(".botones-compra button").forEach((btn) => {
+      btn.type = "button"; // evita envíos de formularios accidentales
+
+      btn.addEventListener("click", () => {
+        // Opción pedida en el botón, ej: "(C.A)" -> "CA"
+        const match = btn.textContent.match(/\(([^)]+)\)/);
+        const opcionDeseada = match ? norm(match[1]) : null;
+
+        const filas = card.querySelectorAll(".precios .fila-precio");
+        let precioNuevo = "";
+        let opcionTexto = "";
+
+        // Si el botón trae opción, busca esa fila. Si no, usa la primera.
+        if (opcionDeseada) {
+          for (const fila of filas) {
+            const tipoTxt = (fila.querySelector(".tipo")?.textContent || "").trim();
+            if (norm(tipoTxt) === opcionDeseada) {
+              precioNuevo = (fila.querySelector(".precio-nuevo")?.textContent || "").trim();
+              opcionTexto = tipoTxt;
+              break;
+            }
+          }
+        }
+
+        // Fallback: primera fila con .precio-nuevo
+        if (!precioNuevo && filas.length) {
+          const f = Array.from(filas).find(fl => fl.querySelector(".precio-nuevo")) || filas[0];
+          precioNuevo = (f.querySelector(".precio-nuevo")?.textContent || "").trim();
+          opcionTexto = (f.querySelector(".tipo")?.textContent || "").trim();
+        }
+
+        enviarWhatsApp({
+          producto: nombre,
+          opcion: opcionTexto,
+          precio: precioNuevo
+        });
+      });
+    });
+  });
+})();
+</script>
+
+        <script src="script.js"></script>
+
+
+</body>
+
+</html>
